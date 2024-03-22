@@ -11,7 +11,10 @@ export class AppComponent implements OnInit{
   timerRunning:Boolean = false;
   timer: number = 0;
   phrases: Array<Object> = [];
-  phrase!: string;
+  phrase = {
+    content: '',
+    author: ''
+  };
   inputPhrase!: string;
   apiResponse: any;
   cronometer: any;
@@ -20,8 +23,9 @@ export class AppComponent implements OnInit{
   http.get('https://api.quotable.io/random').subscribe(answer => {
     console.log(answer);
     this.apiResponse = answer;
-    this.phrase = this.apiResponse.content;
-    this.phrases.push(this.phrase);
+    this.phrase.content = this.apiResponse.content;
+    this.phrase.author = this.apiResponse.author;
+    this.phrases.push(this.phrase.content);
     this.startTyping();
   })
 }

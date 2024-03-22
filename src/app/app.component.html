@@ -1,19 +1,39 @@
+<div class="p-3 mb-2 bg-dark text-white">
 
-  <h1>{{phrase}}</h1>
-  <h1>{{timer}}</h1>
-  <input type="text" [(ngModel)]="inputPhrase" autofocust>
-  @if(inputPhrase.length >= phrase.length){
-    {{stopTyping()}}
-  }
-  <button (click)="stopTyping()">Submit</button>
+  <blockquote class="blockquote text-center">
+    <h1 class="mb-0">{{phrase.content}}</h1>
+  </blockquote>
+  <blockquote class="blockquote text-center">
+    <footer class="blockquote-footer">{{phrase.author}}<cite title="Source Title">Source Title</cite></footer>
+    <h1>{{timer}}</h1>
+    
+    <!-- <div class="input-group input-group-lg">
+      <span class="input-group-text" id="inputGroup-sizing-lg">Type</span>
+      <input type="text" [(ngModel)]="inputPhrase" autofocus class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+    </div>
+    <button (click)="stopTyping()" class="btn btn-success">Submit</button> -->
+  
+  
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="{{phrase.content.length}}" [(ngModel)]="inputPhrase" autofocus>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" (click)="stopTyping()">Finalizar</button>
+      </div>
+    </div>
+  </blockquote>    
+    @if(inputPhrase.length >= phrase.content.length){
+      {{stopTyping()}}
+    }
+  
+    <p>Frases anteriores</p>
+    @for (phrase of phrases; track phrase; let i = $index) {
+      <table>
+        <tr>
+          <td>{{phrase}}</td>
+        </tr>
+      </table>
+    }
+  </div>
+  <router-outlet />
 
-  <p>Your phrases</p>
-  @for (phrase of phrases; track phrase; let i = $index) {
-    <table>
-      <tr>
-        <td>{{phrase}}</td>
-      </tr>
-    </table>
-  }
 
-<router-outlet />
