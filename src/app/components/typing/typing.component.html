@@ -1,0 +1,42 @@
+<div class="p-3 mb-2 bg-dark text-white">
+
+    <blockquote class="blockquote text-center">
+      <h1 class="mb-0">{{phrase.content}}</h1>
+    </blockquote>
+    <blockquote class="blockquote text-center">
+      <footer class="blockquote-footer">{{phrase.author}}<cite title="Source Title"></cite></footer>
+      <h1 id="timer">{{timerCount | timer}}</h1>
+      @if(wpm != undefined){
+        <span>{{wpm | wpm}}</span> 
+      }
+    
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Digite" aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="{{phrase.content.length}}" [(ngModel)]="inputPhrase" autofocus>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="newPhrase()">Próxima</button>
+        </div>
+      </div>
+    </blockquote> 
+    <blockquote class="blockquote text-right">
+      <footer class="blockquote-footer"><cite title="Source Title">{{playerName}}</cite></footer>
+    </blockquote>   
+      @if(inputPhrase.length >= phrase.content.length){
+        {{stopTyping()}}
+      }
+      @for (word of phrase.content; track phrase; let i = $index) {
+        @for (letter of word[i]; track letter; let j = $index) {
+            @if(inputPhrase[i] == letter){
+              {{phrase.content[i] | rightLetter}}
+            }
+        }
+      }
+    
+      <h3>Frases anteriores</h3>
+      @for (phrase of phrases; track phrase; let i = $index) {
+        <table class="table">
+          <tr>
+            <td>{{phrase.content}} -{{phrase.author}}</td>
+          </tr>
+        </table>
+      }
+    </div>

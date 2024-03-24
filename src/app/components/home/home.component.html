@@ -1,0 +1,10 @@
+<div class="container d-flex justify-content-center">
+    <h1>Digite seu nome</h1>
+  </div>
+  <input type="text" placeholder="Nome"  class="container d-flex justify-content-center" width="50" [(ngModel)]="player" >
+  <div class="container d-flex justify-content-center">
+    <label for="">Quantidade de caracteres</label>
+  </div>
+  <input type="number" placeholder="Caracteres?" class="container d-flex justify-content-center" width="50" [(ngModel)]="maxCharacters">
+  
+  <a (click)="setCharacters()" (click)="setPlayerName()" routerLink="/typing" class="container d-flex justify-content-center btn btn-success">Iniciar</a>
