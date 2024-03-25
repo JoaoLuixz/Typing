@@ -29,14 +29,6 @@ export class TypingComponent {
   constructor(private http: HttpClient, private sharedData: SharedDataService){
     this.maxCharacters = this.sharedData.getMaxCharacters();
     this.playerName = this.sharedData.getPlayerName();
-    this.newPhrase();
-    this.startTyping();
-}
- calculateWPM():number{
-   this.inputWords = this.inputPhrase.split(" ");
-   return ((this.inputWords.length) / (this.timerCount / 60));
- }
- newPhrase(){
     this.http.get(`https://api.quotable.io/random?maxLength=${this.maxCharacters}`).subscribe(answer => {
     console.log(answer);
     this.apiResponse = answer;
@@ -47,8 +39,30 @@ export class TypingComponent {
       author: this.phrase.author,
     });
   })
+  
+    this.startTyping();
+}
+
+ newPhrase(){
+  this.http.get(`https://api.quotable.io/random?maxLength=${this.maxCharacters}`).subscribe(answer => {
+    console.log(answer);
+    this.apiResponse = answer;
+    this.phrase.content = this.apiResponse.content;
+    this.phrase.author = this.apiResponse.author;
+    this.phrases.push({
+      content: this.phrase.content,
+      author: this.phrase.author,
+    });
+    this.inputPhrase = "";
+    this.startTyping();
+  })
+  
   this.timerCount = 0;
  }
+ calculateWPM():number{
+  this.inputWords = this.inputPhrase.split(" ");
+  return ((this.inputWords.length) / (this.timerCount / 60));
+}
   // Começa a contagem do cronômetro
   startTyping(){
     this.timer = setInterval(() => {

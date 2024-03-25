@@ -9,8 +9,12 @@ export class TimerPipe implements PipeTransform {
   transform(value: number, ...args: unknown[]): unknown {
     if(value == 60) {
       this.min++;
-      value = 0;
+      value = 1;
     }
+    if(value == 0){
+      this.min = 0;
+    }
+
     return `${this.min}"${value}'`;
 
     //return value > 60 ? `${value / 60}s` : `${value}s`;

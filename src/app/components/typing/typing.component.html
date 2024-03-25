@@ -6,9 +6,7 @@
     <blockquote class="blockquote text-center">
       <footer class="blockquote-footer">{{phrase.author}}<cite title="Source Title"></cite></footer>
       <h1 id="timer">{{timerCount | timer}}</h1>
-      @if(wpm != undefined){
-        <span>{{wpm | wpm}}</span> 
-      }
+      <span class="d-flex justify-content-center">{{wpm | wpm}}</span>
     
       <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Digite" aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="{{phrase.content.length}}" [(ngModel)]="inputPhrase" autofocus>
@@ -23,13 +21,16 @@
       @if(inputPhrase.length >= phrase.content.length){
         {{stopTyping()}}
       }
-      @for (word of phrase.content; track phrase; let i = $index) {
+      @if(wpm != undefined){
+         
+      }
+      <!-- @for (word of phrase.content; track phrase; let i = $index) {
         @for (letter of word[i]; track letter; let j = $index) {
             @if(inputPhrase[i] == letter){
               {{phrase.content[i] | rightLetter}}
             }
         }
-      }
+      } -->
     
       <h3>Frases anteriores</h3>
       @for (phrase of phrases; track phrase; let i = $index) {

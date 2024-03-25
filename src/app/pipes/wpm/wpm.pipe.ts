@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class WpmPipe implements PipeTransform {
 
   transform(value: number, ...args: unknown[]): unknown {
-    return value == null ? 0 : `${value.toFixed(2)} wpm`;
+    return value == null || value == Infinity ? 0 : `${value.toFixed(2)} wpm`;
   }
 
 }
