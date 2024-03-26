@@ -1,37 +1,33 @@
 <div class="p-3 mb-2 bg-dark text-white">
-
+    <!--Mostra frase na tela-->
     <blockquote class="blockquote text-center">
       <h1 class="mb-0">{{phrase.content}}</h1>
     </blockquote>
+    <!--Mostra o autor da frase na tela-->
     <blockquote class="blockquote text-center">
       <footer class="blockquote-footer">{{phrase.author}}<cite title="Source Title"></cite></footer>
-      <h1 id="timer">{{timerCount | timer}}</h1>
+      <!--Mostra o cronômetro na tela-->
+      <h1 id="timer">{{timerSeconds | timer}}</h1>
+      <!--Mostra o resultado do cálculo de pralavras por minuto-->
       <span class="d-flex justify-content-center">{{wpm | wpm}}</span>
-    
       <div class="input-group mb-3">
+        <!--Compo para digitação do usuário-->
         <input type="text" class="form-control" placeholder="Digite" aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="{{phrase.content.length}}" [(ngModel)]="inputPhrase" autofocus>
         <div class="input-group-append">
+          <!--Botão para fazer a requisição de uma nova frase-->
           <button class="btn btn-outline-secondary" type="button" (click)="newPhrase()">Próxima</button>
         </div>
       </div>
     </blockquote> 
     <blockquote class="blockquote text-right">
+      <!--Mostra o nome do usuário da sessão atual-->
       <footer class="blockquote-footer"><cite title="Source Title">{{playerName}}</cite></footer>
-    </blockquote>   
+    </blockquote> 
+    <!--Lógica para terminar a execução do cronômetro-->  
       @if(inputPhrase.length >= phrase.content.length){
         {{stopTyping()}}
       }
-      @if(wpm != undefined){
-         
-      }
-      <!-- @for (word of phrase.content; track phrase; let i = $index) {
-        @for (letter of word[i]; track letter; let j = $index) {
-            @if(inputPhrase[i] == letter){
-              {{phrase.content[i] | rightLetter}}
-            }
-        }
-      } -->
-    
+    <!--Lista as frases requisitadas anteriormente-->
       <h3>Frases anteriores</h3>
       @for (phrase of phrases; track phrase; let i = $index) {
         <table class="table">

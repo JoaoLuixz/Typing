@@ -1,11 +1,14 @@
+<!--Título da aplicação-->
 <h1 class="container d-flex justify-content-center">Typing Game</h1>
 <div class="container d-flex justify-content-center mt-4">
     <label>Digite seu nome</label>
   </div>
+    <!--Campo para entrada do nome do usuário-->
   <input type="text" placeholder="Nome"  class="container d-flex justify-content-center" width="50" [(ngModel)]="player" >
   <div class="container d-flex justify-content-center">
     <label for="">Quantidade de caracteres</label>
   </div>
+  <!--Campo para entradada da quantidade máxima de caracteres a serem requisitadas na frase-->
   <input type="number" placeholder="Caracteres?" class="container d-flex justify-content-center" width="50" [(ngModel)]="maxCharacters">
-  
+  <!--Link de redirecionamento para página de digitação-->
   <a (click)="setCharacters()" (click)="setPlayerName()" routerLink="/typing" class="container d-flex justify-content-center btn btn-success">Iniciar</a>
